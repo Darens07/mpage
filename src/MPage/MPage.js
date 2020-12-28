@@ -38,12 +38,15 @@ export default class {
     if(!this.validationExist(key, 'key')) return false;
     if(!this.validationUndefined(this.state[key], 'exist_data')) return false;
 
+    // Convert data to an array
+    if(!Array.isArray(data)) data = [data];
+
     if(this.state[key].length == 0){
-      this.commit('mp_save_store', {key, data, comparison_key: false});
+      this.commit('mp_save_store', {key, data});
     }else{
       this.commit('mp_save_store', {key, data, comparison_key: this.filters[0]});
     }
-    
+
   }
 
   // Filter data

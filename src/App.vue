@@ -29,10 +29,9 @@ export default {
   },
   methods:{
     saveTest(){
-      var thing = [
-        { id: 21, name: 'test__'+21, gmail: 'test@test.com', phone: '0414077556'+21 },
-        { id: 22, name: 'test__'+22, gmail: 'test@test.com', phone: '0414077556'+22 }
-      ];
+      var thing = { id: 21, name: 'test__'+21, gmail: 'test@test.com', phone: '0414077556'+21 };
+      //   { id: 22, name: 'test__'+22, gmail: 'test@test.com', phone: '0414077556'+22 }
+      // ];
 
       this.users = thing;
     }
@@ -47,6 +46,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
