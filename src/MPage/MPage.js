@@ -32,11 +32,15 @@ export default class {
 
   // Save data
   save(data, key = null){
-    console.log("---- Save Data ----");
-
     // Validations
     if(!this.validationExist(key, 'key')) return false;
     if(!this.validationUndefined(this.state[key], 'exist_data')) return false;
+    if(!Array.isArray(this.state[key])) {
+      alert(alerts.array_required)
+      return false;
+    }
+  
+    console.log("---- Save Data ----");
 
     // Convert data to an array
     if(!Array.isArray(data)) data = [data];
