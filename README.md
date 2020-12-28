@@ -1,7 +1,7 @@
-# Page management "MPage" for VUE
-
 <p align="center">
-  <a href="https://vuejs.org" target="_blank" rel="noopener noreferrer"><img width="100" src="https://vuejs.org/images/logo.png" alt="Vue logo"></a>
+<a href="https://vuejs.org" target="_blank" rel="noopener noreferrer"><img width="100" src="https://vuejs.org/images/logo.png" alt="Vue logo"></a>
 </p>
+
+# Page management "MPage" for VUE
 
 ## Introduction

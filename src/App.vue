@@ -1,24 +1,31 @@
 <template>
-  <div id="app">
+  <div class="mp-main">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>Welcome to Your Vue.js MPage</h1>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import MPage from './MPage/MPage.js';
 
 export default {
   name: 'App',
+  data(){
+    return{
+        mp_users: null,
+    }
+  },
+  mounted(){
+    this.mp_users = new MPage(this.$store);
+  },
   components: {
-    HelloWorld
   }
 }
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+.mp-main {
+  font-family: sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
