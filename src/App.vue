@@ -2,6 +2,7 @@
   <div class="mp-main">
     <img alt="Vue logo" src="./assets/logo.png">
     <h1>Welcome to Your Vue.js MPage</h1>
+    <a @click="saveTest" href="#">Save Test</a>
   </div>
 </template>
 
@@ -12,13 +13,29 @@ export default {
   name: 'App',
   data(){
     return{
-        mp_users: null,
+        mp_main: null,
     }
   },
   mounted(){
-    this.mp_users = new MPage(this.$store);
+    this.mp_main = new MPage(this.$store, null, 10, ['id']);
   },
   components: {
+  },
+  computed:{
+    users:{
+      get(){ return this.mp_main.getPage() },
+      set(values){ this.mp_main.save(values, 'users') }
+    }
+  },
+  methods:{
+    saveTest(){
+      var thing = [
+        { id: 21, name: 'test__'+21, gmail: 'test@test.com', phone: '0414077556'+21 },
+        { id: 22, name: 'test__'+22, gmail: 'test@test.com', phone: '0414077556'+22 }
+      ];
+
+      this.users = thing;
+    }
   }
 }
 </script>

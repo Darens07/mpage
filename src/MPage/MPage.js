@@ -1,3 +1,5 @@
+const alerts = require('./devAlert.json');
+
 export default class {
   // Data of pages
   page = 1;
@@ -29,33 +31,35 @@ export default class {
 
 
   // Save data
-  save(){
+  save(data, key = null){
     console.log("---- Save Data ----");
 
+    // Validations
+    if(!this.validationExist(key, 'key')) return false;
+    if(!this.validationUndefined(this.state[key], 'exist_data')) return false;
+
+    if(this.state[key].length == 0){
+      this.commit('mp_save_store', {key, data, comparison_key: false});
+    }else{
+      this.commit('mp_save_store', {key, data, comparison_key: this.filters[0]});
+    }
+    
   }
+
   // Filter data
   filterData(){
     console.log("---- Filter Data ----");
-
   }
 
-  // CRUD Functions
-    // Create data
-    postData(){
-      console.log("---- Post Data ----");
-    }
-    // Edit data
-    putData(){
-      console.log("---- Put Data ----");
-    }
-    // Remove data
-    deleteData(){
-      console.log("---- Remove Data ----");
-    }
-    // Get object pagination
-    getPage(){
-      console.log("---- Get Page ----");
-    }
+  // Remove data
+  deleteData(){
+    console.log("---- Remove Data ----");
+  }
+
+  // Get object pagination
+  getPage(){
+    console.log("---- Get Page ----");
+  }
 
 
   // Other functions
@@ -69,7 +73,7 @@ export default class {
           this.getters = this.store.getters;
           this.actions = this.store.dispatch;
         }else{
-          alert("The store with the "+ nameStore +" name does not exist...");
+          alert(alerts.exist_store +' "'+ nameStore +'"');
         }
       }else{
         this.store = store;
@@ -80,4 +84,19 @@ export default class {
       }
     }
 
+    // validations
+    validationExist(value, typeError){
+      if(!value || value == null || value == '' || value == ' '){
+        alert(alerts[typeError]);
+        return false;
+      }
+      return true;
+    }
+    validationUndefined(value, typeError){
+      if(value == undefined) {
+        alert(alerts[typeError]);
+        return false;
+      }
+      return true;
+    }
 }
