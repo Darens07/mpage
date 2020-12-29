@@ -7,11 +7,11 @@
   "unpkg": "dist/mpage.common.js",
   "jsdelivr": "dist/mpage.common.js",
   "module": "dist/mpage.common.js",
-  "version": "0.1.0",
+  "version": "2.0.0",
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --target lib --name mpage index.js",
+    "build": "npx vue-cli-service build --target lib --name mpage index.js",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
