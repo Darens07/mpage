@@ -70,15 +70,7 @@ export default class {
       return this.filterData(key, filter);
     }
   }
-
-  // Filter data
-  filterData(key, filter){
-    console.log(key, filter);
-    
-    // Return data
-    return this.returnData();
-  }
-
+  
   // Get pagination
   getPage(key, page){
     // Data required
@@ -111,10 +103,39 @@ export default class {
     return this.returnData();
   }
 
-  // Remove data
-  // removeData(){
-  //   console.log("---- Remove Data ----");
-  // }
+  // Filter data
+  filterData(key, filter){
+    this.state[key].map((item) => {
+      this.filters.map((filterData) => {
+        // Data required
+        var success = false;
+
+        // Validation type search
+        if(typeof item[filterData] == 'number'){
+          if(item[filterData] == filter) success = true;
+        }else{
+          for (var i = 0; i < item[filterData].length; i++) {
+            if(item[filterData].toLowerCase().startsWith(filter.toLowerCase(), i)) success = true;
+          }
+        }
+
+        if(success){
+          // Validation exits item in array items
+          var existInItems = false;
+          this.items.map((itemToView) => {
+            if(itemToView[filterData] == item[filterData]) existInItems = true;
+          });
+
+          // Push to item
+          if(!existInItems) this.items.push(item);
+        }
+
+      });
+    });
+
+    // Return data
+    return this.returnData();
+  }
 
   // Other functions
     // Return data
