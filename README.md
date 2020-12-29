@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="100%" src="./src/assets/cap.jpg" alt="Cap">
+  <img width="100%" src="https://github.com/Darens07/mpage/blob/main/src/assets/cap.jpg" alt="Cap">
 </p>
 
 # Page management "MPage" for VUE
