@@ -43,6 +43,9 @@ export default {
 </script>
 
 <style lang="scss">
+pre{
+  font-size: 15px;
+}
 .mp-data{
   display: flex;
   flex-direction: row;
