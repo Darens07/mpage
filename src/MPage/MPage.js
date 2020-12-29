@@ -74,12 +74,12 @@ export default class {
   // Filter data
   filterData(key, filter){
     console.log(key, filter);
-    
+
     // Return data
     return this.returnData();
   }
 
-  // Get object pagination
+  // Get pagination
   getPage(key, page){
     // Data required
     var total_items = this.state[key].length, init = null, end = null;
