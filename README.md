@@ -120,7 +120,6 @@ data(){
 
 | Params       | Type    | Required | Default     | Description |
 | ---          | ---     | ---      | ---         | ---         |
-
 | Store        | Object  | True     | this.$store | Object of 'VUE' necessary for the operation of the class, since with this you will be able to access the store. |
 | Name Store   | String  | False    | null        | If in your project you are working with multiple stores you will need to specify the name to which you are going to access. |
 | PerPage      | Number  | False    | 10          | This number symbolizes the amount of elements that will be displayed per page. |
@@ -150,10 +149,98 @@ Here we find two functions, one that is responsible for paging and filtering our
 
 | Params       | Type     | Required | Default     | Description |
 | ---          | ---      | ---      | ---         | ---         |
-
 | Key Store    | String   | True     | ---         | Here the store key will be sent, which in this case would be 'users' as we defined previously in the store status. |
 | Page Active  | Number   | True     | 1           | This is where we will make use of the data variable that we created previously called 'page', so that when it changes its value automatically our 'get' method is executed and changes the page. |
 | Filter       | Any      | False    | null        | This is where we will make use of the data variable that we created previously called 'filter', so that when it changes its value automatically our 'get' method is executed and makes a specific search of our data. |
+
+
+## save
+
+| Params       | Type     | Required | Default     | Description |
+| ---          | ---      | ---      | ---         | ---         |
+| Value        | Any      | True     | ---         | This is where our object will go or our arrangement of objects that will be stored in our state. |
+| Key Store    | String   | True     | ---         | Here the store key will be sent, which in this case would be 'users' as we defined previously in the store status. |
+
+
+Once all this is done we can make use of our computed variable called 'users' we can show it in our html:
+
+```html
+<template>
+   <div>
+     {{users}}
+   </div>
+</template>
+```
+
+As well as matching an object or an array of objects so that our set method is executed and our data is updated.
+
+
+
+```js
+sendInfo(){
+  this.users = {id: 1, name: 'Edit to one', gmail: 'edit@gmail.com', phone: '041475656'};
+}
+```
+
+Final and complete example of our component:
+
+```html
+<template>
+  <div class="mp-main">
+    <div class="mp-introduction">
+      <img alt="Vue logo" src="./assets/logo.png">
+      <h1>Welcome to Your Vue.js MPage</h1>
+    </div>
+
+    <div>
+      <a @click="sendInfo" href="#">Edit object</a>
+    </div>
+
+    <pre>{{users}}</pre>
+  </div>
+</template>
+
+<script>
+import { MPage } from '@darens/mpage';
+
+export default {
+  name: 'App',
+  data(){
+    return{
+      mp_main: new MPage(this.$store, null, 10, ['id', 'name']),
+      page: 1,
+      filter: null
+    }
+  },
+  computed:{
+    users:{
+      get(){ return this.mp_main.getItems('users', this.page, this.filter); },
+      set(value){
+        this.mp_main.save(value, 'users');
+        return this.mp_main.getItems('users', this.page, this.filter);
+      }
+    }
+  },
+  methods:{
+    sendInfo(){
+      this.users = {id: 1, name: 'Edit to one', gmail: 'edit@gmail.com', phone: '041475656'};
+    }
+  }
+}
+</script>
+
+<style lang="scss">
+.mp-main {
+  font-family: sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
+}
+.mp-introduction{
+  text-align: center;
+}
+</style>
+```
 
 ## Creator
 
