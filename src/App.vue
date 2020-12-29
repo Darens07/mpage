@@ -30,14 +30,17 @@ export default {
   computed:{
     users:{
       get(){ return this.mp_main.getItems('users', this.page, this.filter); },
-      set(value){ this.mp_main.save(value, 'users') }
+      set(value){
+        this.mp_main.save(value, 'users');
+        return this.mp_main.getItems('users', this.page, this.filter);
+      }
     }
   },
   methods:{
     saveTest(){
       var thing = [
-        { id: 21, name: 'test__'+21, gmail: 'test@test.com', phone: '0414077556'+21 },
-        { id: 22, name: 'test__'+22, gmail: 'test@test.com', phone: '0414077556'+22 }
+        { id: 1, name: 'Editado', gmail: 'test@test.com', phone: '0414077556'+21 },
+        { id: 22, name: 'Editado', gmail: 'test@test.com', phone: '0414077556'+22 }
       ];
 
       this.users = thing;

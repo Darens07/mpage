@@ -31,10 +31,12 @@ export default new Vuex.Store({
           // put data
           var index_item = false;
           state[key].map((itemOfState, index) => {
-            if(itemToSave[comparison_key] == itemOfState[comparison_key]) index_item = index;
+            if(itemToSave[comparison_key] == itemOfState[comparison_key]){
+              index_item = index;
+            }
           });
 
-          if(index_item !== false){
+          if(index_item != false){
             state[key][index_item] = itemToSave;
           }else{
             state[key].push(itemToSave);

@@ -74,7 +74,7 @@ export default class {
   // Filter data
   filterData(key, filter){
     console.log(key, filter);
-
+    
     // Return data
     return this.returnData();
   }
@@ -132,22 +132,16 @@ export default class {
 
     // Save Store
     saveStore(store, nameStore){
-      if(nameStore && nameStore != ''){
-        this.store = store[nameStore];
-        if(this.store){
-          this.state = this.store.state;
-          this.commit = this.store.commit;
-          this.getters = this.store.getters;
-          this.actions = this.store.dispatch;
-        }else{
-          alert(alerts.exist_store +' "'+ nameStore +'"');
-        }
+      if(nameStore && nameStore != '') this.store = store[nameStore];
+      else this.store = store;
+
+      if(this.store){
+        this.state = this.store.state;
+        this.commit = this.store.commit;
+        this.getters = this.store.getters;
+        this.actions = this.store.dispatch;
       }else{
-        this.store = store;
-        this.state = store.state;
-        this.commit = store.commit;
-        this.getters = store.getters;
-        this.actions = store.dispatch;
+        alert(alerts.exist_store +' "'+ nameStore +'"');
       }
     }
 
