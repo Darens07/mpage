@@ -1,6 +1,5 @@
 <p align="center">
-  <img width="100%" src="./src/assets/cap_1.jpg" alt="Cap 1">
-  <img width="100%" src="./src/assets/cap_2.jpg" alt="Cap 2">
+  <img width="100%" src="./src/assets/cap.jpg" alt="Cap">
 </p>
 
 # Page management "MPage" for VUE
