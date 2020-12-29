@@ -33,6 +33,7 @@
   },
   "files": [
     "/dist",
+    "/src/assets",
     "README.md"
   ],
   "repository": {
