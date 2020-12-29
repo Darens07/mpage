@@ -2,5 +2,8 @@
   "key": "The name of the key where your data will be saved is required.",
   "exist_store": "This store does not exist.",
   "exist_data": "The data does not exist in the store.",
-  "array_required": "The data found in the store must be an arrangement."
+  "array_required": "The data found in the store must be an arrangement.",
+  "page_not_found": "Page not found",
+  "results_found": "No results found",
+  "elements_exist": "There are no elements."
 }

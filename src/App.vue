@@ -3,6 +3,13 @@
     <img alt="Vue logo" src="./assets/logo.png">
     <h1>Welcome to Your Vue.js MPage</h1>
     <a @click="saveTest" href="#">Save Test</a>
+    <div class="">
+      <input v-model="filter" type="text">
+    </div>
+    <div class="">
+      {{users}}
+    </div>
+
   </div>
 </template>
 
@@ -13,18 +20,17 @@ export default {
   name: 'App',
   data(){
     return{
-        mp_main: null,
+        mp_main: new MPage(this.$store, null, 10, ['id']),
+        page: 1,
+        filter: null
     }
-  },
-  mounted(){
-    this.mp_main = new MPage(this.$store, null, 10, ['id']);
   },
   components: {
   },
   computed:{
     users:{
-      get(){ return this.mp_main.getPage() },
-      set(values){ this.mp_main.save(values, 'users') }
+      get(){ return this.mp_main.getItems('users', this.page, this.filter); },
+      set(value){ this.mp_main.save(value, 'users') }
     }
   },
   methods:{
@@ -35,7 +41,7 @@ export default {
       ];
 
       this.users = thing;
-    }
+    },
   }
 }
 </script>

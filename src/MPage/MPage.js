@@ -8,6 +8,7 @@ export default class {
   items = [];
   filters = [];
   orders = [];
+  status = ['success',true];
 
   // VUEX
   store = null;
@@ -32,15 +33,15 @@ export default class {
 
   // Save data
   save(data, key = null){
+    console.log("---- Save Data ----");
+
     // Validations
     if(!this.validationExist(key, 'key')) return false;
     if(!this.validationUndefined(this.state[key], 'exist_data')) return false;
     if(!Array.isArray(this.state[key])) {
-      alert(alerts.array_required)
+      alert(alerts.array_required);
       return false;
     }
-  
-    console.log("---- Save Data ----");
 
     // Convert data to an array
     if(!Array.isArray(data)) data = [data];
@@ -50,26 +51,85 @@ export default class {
     }else{
       this.commit('mp_save_store', {key, data, comparison_key: this.filters[0]});
     }
+  }
 
+  // Get pagination and filters
+  getItems(key, page, filter = null){
+    console.log("---- Get Items ----");
+
+    // Init
+    this.status = ['success',true];
+    this.items = [];
+
+    // Validations
+    if(!this.validationExist(key, 'key')) return false;
+
+    if(!filter || filter == null || filter == ''){
+      return this.getPage(key, page);
+    }else{
+      return this.filterData(key, filter);
+    }
   }
 
   // Filter data
-  filterData(){
-    console.log("---- Filter Data ----");
-  }
-
-  // Remove data
-  deleteData(){
-    console.log("---- Remove Data ----");
+  filterData(key, filter){
+    console.log(key, filter);
+    
+    // Return data
+    return this.returnData();
   }
 
   // Get object pagination
-  getPage(){
-    console.log("---- Get Page ----");
+  getPage(key, page){
+    // Data required
+    var total_items = this.state[key].length, init = null, end = null;
+
+    // Calculate pages
+    this.pages = total_items / this.perpage;
+    if(!Number.isInteger(this.pages)) this.pages = parseInt(this.pages) + 1;
+
+    // Validation page active alredy exist
+    if(!page || this.pages < page) {
+      this.page = 1;
+      this.status = [alerts.page_not_found,false];
+    }else {
+      this.page = page;
+    }
+
+    if(total_items != 0){
+      // Calculate "init" and "end"
+      end = this.perpage * this.page;
+      init = end - this.perpage;
+
+      // Inserting data to paginate
+      for (var i = init; i < end; i++) this.items.push(this.state[key][i]);
+    }else{
+      this.status = [alerts.elements_exist,false];
+    }
+
+    // Return data
+    return this.returnData();
   }
 
+  // Remove data
+  // removeData(){
+  //   console.log("---- Remove Data ----");
+  // }
 
   // Other functions
+    // Return data
+    returnData(){
+      return {
+        filters: this.filters,
+        items: this.items,
+        orders: this.orders,
+        page: this.page,
+        pages: this.pages,
+        perpage: this.perpage,
+        status: this.status
+      };
+    }
+
     // Save Store
     saveStore(store, nameStore){
       if(nameStore && nameStore != ''){

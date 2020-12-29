@@ -4,7 +4,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex);
 
 var test = [];
-for (var i = 0; i < 20; i++) {
+for (var i = 0; i < 40; i++) {
   test.push({
     id: i,
     name: 'test__'+i,
@@ -16,7 +16,7 @@ for (var i = 0; i < 20; i++) {
 export default new Vuex.Store({
   state: {
     users: [
-      // ...test
+      ...test
     ]
   },
   mutations: {
