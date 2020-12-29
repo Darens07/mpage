@@ -1,12 +1,8 @@
 <p align="center">
   <a href="https://vuejs.org" target="_blank" rel="noopener noreferrer">
-    <img width="100" src="https://vuejs.org/images/logo.png" alt="Vue logo">
+    <img width="100%" src="./src/assets/cap_1.jpg" alt="Cap 1">
+    <img width="100%" src="./src/assets/cap_2.jpg" alt="Cap 2">
   </a>
-</p>
-
-<p align="center">
-  <img width="50" src="./src/assets/cap_1.jpg" alt="Cap 1">
-  <img width="50" src="./src/assets/cap_2.jpg" alt="Cap 2">
 </p>
 
 # Page management "MPage" for VUE
