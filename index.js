@@ -1,8 +1,9 @@
 // Import vue component
 import MPage from './src/MPage/MPage.js';
+import { preCode, mpPaginator } from './src/components';
 
 // Export components
-export { MPage };
+export { MPage, preCode, mpPaginator };
 
 // Declare install function executed by Vue.use()
 export function install(Vue) {
@@ -10,7 +11,8 @@ export function install(Vue) {
 
 	install.installed = true;
 
-  // Vue.component('MPage', MPage);
+  Vue.component('preCode', preCode);
+  Vue.component('mpPaginator', mpPaginator);
 }
 
 const plugin = {

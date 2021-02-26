@@ -4,17 +4,21 @@
       <img alt="Vue logo" src="./assets/logo.png">
       <h1>Welcome to Your Vue.js MPage</h1>
     </div>
-    
+    <mp-paginator v-model="page" :paginator="users"/>
+
     <pre-code :object="users" />
   </div>
 </template>
 
 <script>
+// Helpers
 import MPage from './MPage/MPage.js';
-import preCode from './components/preCode';
+// components
+import { preCode, mpPaginator } from './components';
 
 export default {
   name: 'App',
+  components: { preCode, mpPaginator },
   data(){
     return{
       mp_main: new MPage(this.$store, null, 10, ['id', 'name']),
@@ -26,13 +30,11 @@ export default {
     users:{
       get(){ return this.mp_main.getItems('users', this.page, this.filter); },
       set(value){
+        console.log("Cambio de pagina....");
         this.mp_main.save(value, 'users');
         return this.mp_main.getItems('users', this.page, this.filter);
       }
     }
-  },
-  components: {
-    preCode
   },
   methods:{
     //
@@ -45,7 +47,7 @@ export default {
   font-family: sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+  color: #35495e;
 }
 .mp-introduction{
   text-align: center;

@@ -19,10 +19,11 @@ export default class {
 
   // Init MPage
   constructor(store = null, nameStore = null, perpage = null, filters = null, orders = null){
-    console.log("---- MPage Init ----");
+    // Validation store
+    if(!this.validationExist(store, 'store_required')) return false;
 
     // Init store
-    if(store != null) this.saveStore(store, nameStore);
+    this.saveStore(store, nameStore);
 
     // Init pagination
     if(perpage != null) this.perpage = perpage;
@@ -33,8 +34,6 @@ export default class {
 
   // Save data
   save(data, key = null){
-    console.log("---- Save Data ----");
-
     // Validations
     if(!this.validationExist(key, 'key')) return false;
     if(!this.validationUndefined(this.state[key], 'exist_data')) return false;
@@ -55,9 +54,10 @@ export default class {
 
   // Get pagination and filters
   getItems(key, page, filter = null){
-    console.log("---- Get Items ----");
+    // Validation page
+    if(page == this.page && this.items.length > 0) return this.myData();
 
-    // Init
+    // Init data
     this.status = ['success',true];
     this.items = [];
 
@@ -70,7 +70,7 @@ export default class {
       return this.filterData(key, filter);
     }
   }
-  
+
   // Get pagination
   getPage(key, page){
     // Data required
@@ -81,10 +81,13 @@ export default class {
     if(!Number.isInteger(this.pages)) this.pages = parseInt(this.pages) + 1;
 
     // Validation page active alredy exist
-    if(!page || this.pages < page) {
-      this.page = 1;
+    if(this.pages < page) {
+      this.status = [alerts.page_not_exist,false];
+      this.page = this.pages;
+    }else if(page < 1){
       this.status = [alerts.page_not_found,false];
-    }else {
+      this.page = 1;
+    }else{
       this.page = page;
     }
 
@@ -92,15 +95,14 @@ export default class {
       // Calculate "init" and "end"
       end = this.perpage * this.page;
       init = end - this.perpage;
-
       // Inserting data to paginate
-      for (var i = init; i < end; i++) this.items.push(this.state[key][i]);
+      for (var i = init; i < end; i++) if(this.state[key][i]) this.items.push(this.state[key][i]);
     }else{
       this.status = [alerts.elements_exist,false];
     }
 
     // Return data
-    return this.returnData();
+    return this.myData();
   }
 
   // Filter data
@@ -134,12 +136,12 @@ export default class {
     });
 
     // Return data
-    return this.returnData();
+    return this.myData();
   }
 
   // Other functions
     // Return data
-    returnData(){
+    myData(){
       return {
         filters: this.filters,
         items: this.items,

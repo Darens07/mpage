@@ -4,7 +4,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex);
 
 var test = [];
-for (var i = 0; i < 40; i++) {
+for (var i = 1; i <= 194; i++) {
   test.push({
     id: i,
     name: 'test__'+i,
