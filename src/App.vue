@@ -30,7 +30,6 @@ export default {
     users:{
       get(){ return this.mp_main.getItems('users', this.page, this.filter); },
       set(value){
-        console.log("Cambio de pagina....");
         this.mp_main.save(value, 'users');
         return this.mp_main.getItems('users', this.page, this.filter);
       }

@@ -7,7 +7,7 @@
   "unpkg": "dist/mpage.common.js",
   "jsdelivr": "dist/mpage.common.js",
   "module": "dist/mpage.common.js",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",

@@ -14,7 +14,6 @@ export default class {
   store = null;
   state = null;
   commit = null;
-  getters = null;
   actions = null;
 
   // Init MPage
@@ -155,13 +154,12 @@ export default class {
 
     // Save Store
     saveStore(store, nameStore){
-      if(nameStore && nameStore != '') this.store = store[nameStore];
+      if(nameStore && nameStore != '') this.store = store._modulesNamespaceMap[nameStore+'/'].context;
       else this.store = store;
 
       if(this.store){
         this.state = this.store.state;
         this.commit = this.store.commit;
-        this.getters = this.store.getters;
         this.actions = this.store.dispatch;
       }else{
         alert(alerts.exist_store +' "'+ nameStore +'"');
