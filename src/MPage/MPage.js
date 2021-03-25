@@ -80,7 +80,7 @@ export default class {
     if(!Number.isInteger(pages)) pages = parseInt(pages) + 1;
 
     // Validation page active alredy exist
-    if(this.pages < page) {
+    if(pages < page) {
       this.status = [alerts.page_not_exist,false];
       this.page = pages;
     }else if(page < 1){
