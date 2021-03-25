@@ -52,9 +52,9 @@ export default class {
   }
 
   // Get pagination and filters
-  getItems(key, page, filter = null, pagesNow = false){
+  getItems(key, page, filter = null){
     // Validation page
-    if(page == this.page && this.items.length > 0) return this.myData();
+    if(page == this.page && this.items.length > 0) return this.myData(key);
 
     // Init data
     this.status = ['success',true];
@@ -64,34 +64,31 @@ export default class {
     if(!this.validationExist(key, 'key')) return false;
 
     if(!filter || filter == null || filter == ''){
-      return this.getPage(key, page, pagesNow);
+      return this.getPage(key, page);
     }else{
       return this.filterData(key, filter);
     }
   }
 
   // Get pagination
-  getPage(key, page, pagesNow){
+  getPage(key, page){
     // Data required
     var total_items = this.state[key].length, init = null, end = null;
 
     // Calculate pages
-    let pages = total_items / this.perpage;
-    if(!Number.isInteger(pages)) pages = parseInt(pages) + 1;
+    this.pages = total_items / this.perpage;
+    if(!Number.isInteger(this.pages)) this.pages = parseInt(this.pages) + 1;
 
     // Validation page active alredy exist
-    if(pages < page) {
+    if(this.pages < page) {
       this.status = [alerts.page_not_exist,false];
-      this.page = pages;
+      this.page = this.pages;
     }else if(page < 1){
       this.status = [alerts.page_not_found,false];
       this.page = 1;
     }else{
       this.page = page;
     }
-
-    if(pagesNow > pages) this.pages = pagesNow;
-    else this.pages = pages;
 
     if(total_items != 0){
       // Calculate "init" and "end"
@@ -104,7 +101,7 @@ export default class {
     }
 
     // Return data
-    return this.myData();
+    return this.myData(key);
   }
 
   // Filter data
@@ -138,12 +135,14 @@ export default class {
     });
 
     // Return data
-    return this.myData();
+    return this.myData(key);
   }
 
   // Other functions
     // Return data
-    myData(){
+    myData(key){
+      if(this.state[key].pages > this.pages) this.pages = this.state[key].pages;
+
       return {
         filters: this.filters,
         items: this.items,
