@@ -92,6 +92,7 @@ export default {
   },
   methods:{
     changePage(value){
+      if(value > this.paginator.pages || value < 1) return false;
       // Change page
       this.page = value;
     },
@@ -108,13 +109,7 @@ export default {
 
       return false;
     }
-  },
-  watch:{
-    paginator(data){
-      // Verify page active
-      if(data.page != this.page) this.page = data.page;
-    }
-  },
+  }
 }
 </script>
 

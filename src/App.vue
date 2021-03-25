@@ -28,7 +28,10 @@ export default {
   },
   computed:{
     users:{
-      get(){ return this.mp_main.getItems('users', this.page, this.filter); },
+      get(){
+        console.log("Get...");
+        return this.mp_main.getItems('users', this.page, this.filter);
+      },
       set(value){
         this.mp_main.save(value, 'users');
         return this.mp_main.getItems('users', this.page, this.filter);
