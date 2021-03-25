@@ -52,7 +52,7 @@ export default class {
   }
 
   // Get pagination and filters
-  getItems(key, page, filter = null){
+  getItems(key, page, filter = null, pagesNow = false){
     // Validation page
     if(page == this.page && this.items.length > 0) return this.myData();
 
@@ -64,14 +64,14 @@ export default class {
     if(!this.validationExist(key, 'key')) return false;
 
     if(!filter || filter == null || filter == ''){
-      return this.getPage(key, page);
+      return this.getPage(key, page, pagesNow);
     }else{
       return this.filterData(key, filter);
     }
   }
 
   // Get pagination
-  getPage(key, page){
+  getPage(key, page, pagesNow){
     // Data required
     var total_items = this.state[key].length, init = null, end = null;
 
@@ -90,8 +90,8 @@ export default class {
       this.page = page;
     }
 
-    this.pages = pages;
-    if(this.state[key] && this.state[key].pages > pages) this.pages = this.state[key].pages;
+    if(pagesNow > pages) this.pages = pagesNow;
+    else this.pages = pages;
 
     if(total_items != 0){
       // Calculate "init" and "end"
