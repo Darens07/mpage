@@ -54,7 +54,7 @@ export default class {
   // Get pagination and filters
   getItems(key, page, filter = null){
     // Validation page
-    if(page == this.page && this.items.length > 0) return this.myData(key);
+    if(page == this.page && this.items.length > 0) return this.myData();
 
     // Init data
     this.status = ['success',true];
@@ -101,7 +101,7 @@ export default class {
     }
 
     // Return data
-    return this.myData(key);
+    return this.myData();
   }
 
   // Filter data
@@ -135,14 +135,12 @@ export default class {
     });
 
     // Return data
-    return this.myData(key);
+    return this.myData();
   }
 
   // Other functions
     // Return data
-    myData(key){
-      if(this.state[key].pages > this.pages) this.pages = this.state[key].pages;
-
+    myData(){
       return {
         filters: this.filters,
         items: this.items,
