@@ -54,7 +54,7 @@ export default class {
   // Get pagination and filters
   getItems(key, page, filter = null){
     // Validation page
-    if(page == this.page && this.items.length > 0) return this.myData(key);
+    if(page == this.page && this.items.length > 0) return this.myData();
 
     // Init data
     this.status = ['success',true];
@@ -76,19 +76,22 @@ export default class {
     var total_items = this.state[key].length, init = null, end = null;
 
     // Calculate pages
-    this.pages = total_items / this.perpage;
-    if(!Number.isInteger(this.pages)) this.pages = parseInt(this.pages) + 1;
+    let pages = total_items / this.perpage;
+    if(!Number.isInteger(pages)) pages = parseInt(pages) + 1;
 
     // Validation page active alredy exist
     if(this.pages < page) {
       this.status = [alerts.page_not_exist,false];
-      this.page = this.pages;
+      this.page = pages;
     }else if(page < 1){
       this.status = [alerts.page_not_found,false];
       this.page = 1;
     }else{
       this.page = page;
     }
+
+    this.pages = pages;
+    if(this.state[key] && this.state[key].pages > pages) this.pages = this.state[key].pages;
 
     if(total_items != 0){
       // Calculate "init" and "end"
@@ -101,7 +104,7 @@ export default class {
     }
 
     // Return data
-    return this.myData(key);
+    return this.myData();
   }
 
   // Filter data
@@ -135,14 +138,12 @@ export default class {
     });
 
     // Return data
-    return this.myData(key);
+    return this.myData();
   }
 
   // Other functions
     // Return data
-    myData(key){
-      if(this.state[key].pages > this.pages) this.pages = this.state[key].pages;
-      
+    myData(){
       return {
         filters: this.filters,
         items: this.items,
