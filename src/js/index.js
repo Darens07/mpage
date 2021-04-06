@@ -56,7 +56,7 @@ export default class MPage {
   // Get pagination or filters
   get(key, page, filter = null){
     // Validation page
-    if(page == this.page && this.items.length > 0) return this.myData();
+    if(page == this.page && this.items && this.items.length > 0) return this.myData();
 
     // Init data
     this.status = ['success',true];
