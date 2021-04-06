@@ -26,6 +26,13 @@ export default class MPage {
 
     // Backend MPage
     this.backendPage = false;
+
+    return this;
+  }
+
+  // Init data of pages static
+  static index(perpage = null, filters = null, orders = null){
+    return new MPage(perpage, filters, orders);
   }
 
 

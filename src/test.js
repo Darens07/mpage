@@ -14,7 +14,7 @@
 // My js
 import MPage from './js/MPage/index.js';
 
-let paginator = new MPage(10);
+let paginator = MPage.index(10);
 
 paginator.save(['andres','pedro','juan','andres','pedro','juan','andres','pedro','juan'], 'users');
 

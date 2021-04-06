@@ -3,7 +3,7 @@
   "description": "Components library",
   "author": "'Darens07' <'andresrodrigues634@gmail.com'>",
   "license": "MIT",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "main": "dist/js/MPage-bundle.js",
   "unpkg": "dist/js/MPage-bundle.js",
   "jsdelivr": "dist/js/MPage-bundle.js",
