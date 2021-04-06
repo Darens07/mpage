@@ -76,7 +76,8 @@ export default class MPage {
   // Get pagination
   paginator(key){
     // Data required
-    var countItems = this.state[key].length, init = null, end = null;
+    let countItems = 0, init = null, end = null;
+    if(this.state[key] && this.state[key].length > 0) countItems = this.state[key].length;
 
     if(!this.backendPage){
       // Calculate pages
