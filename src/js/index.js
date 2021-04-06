@@ -51,12 +51,14 @@ export default class MPage {
     // Save data
     if(!this.validateState(key)) this.mutations.create(key, data);
     else this.mutations.update(key, data, pk);
+
+    return this.get(key, this.page);
   }
 
   // Get pagination or filters
   get(key, page, filter = null){
     // Validation page
-    if(page == this.page && this.items && this.items.length > 0) return this.myData();
+    if(page == this.page && this.items.length > 0) return this.myData();
 
     // Init data
     this.status = ['success',true];
@@ -65,6 +67,7 @@ export default class MPage {
 
     // Validations
     if(!this.requiredKey(key)) return false;
+    if(!this.validateState(key)) return this.myData();
 
     if(filter === null || this.filters === null){
       return this.paginator(key);
@@ -143,7 +146,7 @@ export default class MPage {
 
     validateState(prop, keyError = false){
       if(!this.state.hasOwnProperty(prop)){
-        if(keyError) alert(alerts[keyError]);
+        this.status = [alerts.elements_exist,false];
         return false;
       }
       return true;
