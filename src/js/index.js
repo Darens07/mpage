@@ -1,5 +1,5 @@
-import alerts from './js/devAlert.js';
-import store from './js/store';
+import alerts from './devAlert.js';
+import store from './store';
 
 //
 // @MPage
