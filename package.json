@@ -3,11 +3,11 @@
   "description": "Components library",
   "author": "'Darens07' <'andresrodrigues634@gmail.com'>",
   "license": "MIT",
-  "version": "3.0.3",
-  "main": "/src/js/MPage/index.js",
-  "unpkg": "/src/js/MPage/index.js",
-  "jsdelivr": "/src/js/MPage/index.js",
-  "module": "/src/js/MPage/index.js",
+  "version": "3.0.4",
+  "main": "/src/js/index.js",
+  "unpkg": "/src/js/index.js",
+  "jsdelivr": "/src/js/index.js",
+  "module": "/src/js/index.js",
   "scripts": {
     "dev": "rimraf dist && npx webpack --config webpack.config.js -d",
     "build": "rimraf dist && webpack --config webpack.config.js -p",
@@ -26,7 +26,7 @@
     "table pagination"
   ],
   "files": [
-    "/src/js/MPage/index.js",
+    "/src/js",
     "README.md"
   ],
   "dependencies": {
