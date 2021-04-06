@@ -6,17 +6,17 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   entry: {
-    MPage: './src/js/MPage/index.js',
+    index: './src/js/MPage/index.js',
     // test: './src/test.js',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name]-bundle.js',
+    filename: '[name].js',
   },
   plugins:[
     new HtmlWebpackPlugin({
       template: './src/view/index.handlebars',
-      chunks: ['MPage']
+      chunks: ['index']
     }),
     // new MiniCssExtractPlugin({
     //   filename: 'css/[name]-styles.css',
