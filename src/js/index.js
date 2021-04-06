@@ -37,7 +37,7 @@ export default class MPage {
 
 
   // Save data
-  save(data, key, pk = false){
+  save(key, data, pk = false){
     // Validations
     if(!this.undefinedData(data)) return false;
     if(!this.requiredKey(key)) return false;
