@@ -13,7 +13,6 @@ export default class MPage {
     // Init data
     this.page = 1;
     this.pages = 1;
-    this.position = 0;
     this.perpage = perpage;
     this.filters = filters;
     this.orders = orders;
@@ -23,9 +22,7 @@ export default class MPage {
     // Init store
     this.state = store.state;
     this.mutations = store.mutations;
-
-    // Backend MPage
-    this.backendPage = false;
+    this.getters = store.getters;
 
     return this;
   }
@@ -41,11 +38,10 @@ export default class MPage {
     // Validations
     if(!this.undefinedData(data)) return false;
     if(!this.requiredKey(key)) return false;
-    // If exist a MPage for backend
-    if(data.items){
+    // If exist a "pages"
+    if(data.pages){
       this.pages = data.pages;
-      this.position = data.position;
-      this.backendPage = true;
+      this.mutations.savePages(key ,data.pages);
       data = data.items;
     }
     // Save data
@@ -64,6 +60,7 @@ export default class MPage {
     this.status = ['success',true];
     this.items = [];
     this.page = page;
+    this.pages = this.getters.pages(key);
 
     // Validations
     if(!this.requiredKey(key)) return false;
@@ -82,7 +79,7 @@ export default class MPage {
     let countItems = 0, init = null, end = null;
     if(this.state[key] && this.state[key].length > 0) countItems = this.state[key].length;
 
-    if(!this.backendPage){
+    if(!this.pages){
       // Calculate pages
       this.pages = countItems / this.perpage;
       if(!Number.isInteger(this.pages)) this.pages = parseInt(this.pages) + 1;
@@ -122,7 +119,6 @@ export default class MPage {
         page: this.page,
         pages: this.pages,
         perpage: this.perpage,
-        position: this.position,
         status: this.status
       };
     }
@@ -151,4 +147,8 @@ export default class MPage {
       }
       return true;
     }
+
+    //# Data for develop
+      // Position from where to search depending on the current page
+      getPosition(page){ return (page * this.perpage) - this.perpage }
 }

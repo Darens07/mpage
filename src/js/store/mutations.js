@@ -24,4 +24,8 @@ const update = (key, data, pk) => {
   });
 }
 
-export default{ create, update };
+const savePages = (key, pages) => {
+  state[key+'Pages'] = pages;
+}
+
+export default{ create, update, savePagesOfBackend };
