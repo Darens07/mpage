@@ -149,6 +149,17 @@ export default class MPage {
     }
 
     //# Data for develop
-      // Position from where to search depending on the current page
-      getPosition(page){ return (page * this.perpage) - this.perpage }
+      // Params for backend MPage
+      params(key, page){
+        let position = (page * this.perpage) - this.perpage;
+        let numberItems = this.perpage;
+
+        if(this.state[key] && this.state[key].length != position){
+          position = 0;
+          numberItems = this.perpage * page;
+        }
+
+        let params = '?position=' + position + '&perpage=' + numberItems + '&truePerpage=' + this.perpage;
+        return params;
+      }
 }
