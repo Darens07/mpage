@@ -37,11 +37,13 @@ export default class MPage {
   save(key, data, pk = false){
     // Validations
     if(!this.undefinedData(data)) return false;
+    if(!this.dataNull(data)) return false;
     if(!this.requiredKey(key)) return false;
+    
     // If exist a "pages"
     if(data.pages){
       this.pages = data.pages;
-      this.mutations.savePages(key ,data.pages);
+      this.mutations.savePages(key, data.pages);
       data = data.items;
     }
     // Save data
@@ -127,6 +129,14 @@ export default class MPage {
     undefinedData(value, keyError = false){
       if(value == 'undefined'){
         alert(alerts.undefined);
+        return false;
+      }
+      return true;
+    }
+
+    dataNull(value, keyError = false){
+      if(value == null || value.items.length == 0){
+        this.status = [alerts.elements_exist,false];
         return false;
       }
       return true;
