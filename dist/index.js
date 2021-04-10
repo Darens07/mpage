@@ -39,12 +39,13 @@ export default class MPage {
     if(!this.undefinedData(data)) return false;
     if(!this.dataNull(data)) return false;
     if(!this.requiredKey(key)) return false;
-    
+
     // If exist a "pages"
     if(data.pages){
       this.pages = data.pages;
       this.mutations.savePages(key, data.pages);
       data = data.items;
+      this.items = [];
     }
     // Save data
     if(!this.validateState(key)) this.mutations.create(key, data);
