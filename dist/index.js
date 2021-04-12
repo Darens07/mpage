@@ -45,8 +45,8 @@ export default class MPage {
       this.pages = data.pages;
       this.mutations.savePages(key, data.pages);
       data = data.items;
-      this.items = [];
     }
+    this.items = [];
     // Save data
     if(!this.validateState(key)) this.mutations.create(key, data);
     else this.mutations.update(key, data, pk);
@@ -57,7 +57,7 @@ export default class MPage {
   // Get pagination or filters
   get(key, page, filter = null){
     // Validation page
-    if(page == this.page && this.items.length > 0) return this.myData();
+    if(page == this.page && this.items && this.items.length > 0) return this.myData();
 
     // Init data
     this.status = ['success',true];
@@ -136,7 +136,7 @@ export default class MPage {
     }
 
     dataNull(value, keyError = false){
-      if(value == null || value.items.length == 0){
+      if(value == null || (value.items && value.items.length == 0)){
         this.status = [alerts.elements_exist,false];
         return false;
       }
