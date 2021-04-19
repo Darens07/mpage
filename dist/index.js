@@ -32,9 +32,8 @@ export default class MPage {
     return new MPage(perpage, filters, orders);
   }
 
-
   // Save data
-  save(key, data, pk = false){
+  save(key, data, pk = false, reset = false){
     // Validations
     if(!this.undefinedData(data)) return false;
     if(!this.dataNull(data)) return false;
@@ -47,8 +46,9 @@ export default class MPage {
       data = data.items;
     }
     this.items = [];
+
     // Save data
-    if(!this.validateState(key)) this.mutations.create(key, data);
+    if(!this.validateState(key) || reset != false) this.mutations.create(key, data);
     else this.mutations.update(key, data, pk);
 
     return this.get(key, this.page);
@@ -112,6 +112,23 @@ export default class MPage {
     return this.myData();
   }
 
+  // Delete data only ARRAYS
+  delete(key, data, pk = false){
+    // Validations
+    if(!this.undefinedData(pk)) return false;
+    if(!this.dataNull(data)) return false;
+    if(!this.validateState(key)) return false;
+
+    // Reset items
+    this.items = [];
+
+    // Detele item
+    this.mutations.delete(key, data, pk);
+
+    // Get items
+    return this.get(key, this.page);
+  }
+
   // Other functions
     // My data
     myData(){
@@ -127,7 +144,7 @@ export default class MPage {
     }
 
     // validations
-    undefinedData(value, keyError = false){
+    undefinedData(value){
       if(value == 'undefined'){
         alert(alerts.undefined);
         return false;
@@ -135,7 +152,7 @@ export default class MPage {
       return true;
     }
 
-    dataNull(value, keyError = false){
+    dataNull(value){
       if(value == null || (value.items && value.items.length == 0)){
         this.status = [alerts.elements_exist,false];
         return false;
@@ -143,7 +160,7 @@ export default class MPage {
       return true;
     }
 
-    requiredKey(value, keyError = false){
+    requiredKey(value){
       if(!value || typeof value != 'string'){
         alert(alerts.key);
         return false;
@@ -151,7 +168,7 @@ export default class MPage {
       return true;
     }
 
-    validateState(prop, keyError = false){
+    validateState(prop){
       if(!this.state.hasOwnProperty(prop)){
         this.status = [alerts.elements_exist,false];
         return false;
@@ -173,4 +190,6 @@ export default class MPage {
         let params = '?position=' + position + '&perpage=' + numberItems + '&truePerpage=' + this.perpage;
         return params;
       }
+      // Params for backend MPage refresh
+      resetParams(key, page){ return '?position=0&perpage=' + this.state[key].length + '&truePerpage=' + this.perpage; }
 }

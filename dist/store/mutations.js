@@ -24,8 +24,15 @@ const update = (key, data, pk) => {
   });
 }
 
+const delete = (key, pk) => {
+  state[key].map((item, index) => {
+    if(data.hasOwnProperty(pk) && item[pk] == data[pk]) return state[key].splice(index, 1);
+    else if(item[pk] == data) return state[key].splice(index, 1);
+  });
+}
+
 const savePages = (key, pages) => {
   state[key+'Pages'] = pages;
 }
 
-export default{ create, update, savePages };
+export default{ create, update, delete, savePages };
