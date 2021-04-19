@@ -4,6 +4,11 @@ const create = (key, data) => {
   state[key] = data;
 }
 
+const reset = (key, data) => {
+  state[key] = null;
+  state[key] = data;
+}
+
 const update = (key, data, pk) => {
   data.map((itemToSave) => {
     let put_state = null;
@@ -35,4 +40,4 @@ const savePages = (key, pages) => {
   state[key+'Pages'] = pages;
 }
 
-export default{ create, update, remove, savePages };
+export default{ create, update, remove, savePages, reset };
