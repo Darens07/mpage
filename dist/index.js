@@ -113,7 +113,7 @@ export default class MPage {
   }
 
   // Delete data only ARRAYS
-  delete(key, data, pk = false){
+  remove(key, data, pk = false){
     // Validations
     if(!this.undefinedData(pk)) return false;
     if(!this.dataNull(data)) return false;
@@ -123,7 +123,7 @@ export default class MPage {
     this.items = [];
 
     // Detele item
-    this.mutations.delete(key, data, pk);
+    this.mutations.remove(key, data, pk);
 
     // Get items
     return this.get(key, this.page);
