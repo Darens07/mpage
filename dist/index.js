@@ -33,7 +33,7 @@ export default class MPage {
   }
 
   // Save data
-  save(key, data, pk = false, reset = false){
+  save(key, data, pk = false){
     // Validations
     if(!this.undefinedData(data)) return false;
     if(!this.dataNull(data)) return false;
@@ -48,7 +48,6 @@ export default class MPage {
     this.items = [];
 
     // Save data
-    if(reset != false) this.mutations.reset(key, data);
     else if(!this.validateState(key)) this.mutations.create(key, data);
     else this.mutations.update(key, data, pk);
 
@@ -192,5 +191,8 @@ export default class MPage {
         return params;
       }
       // Params for backend MPage refresh
-      resetParams(key, page){ return '?position=0&perpage=' + this.state[key].length + '&truePerpage=' + this.perpage; }
+      resetParams(key, page){
+        if(this.state[key] && this.state[key].length > 0) return '?position=0&perpage=' + this.state[key].length * 2 + '&truePerpage=' + this.perpage;
+        else return '?position=0&perpage=' + this.perpage + '&truePerpage=' + this.perpage;
+      }
 }
