@@ -24,15 +24,21 @@ const update = (key, data, pk) => {
   });
 }
 
-const remove = (key, pk) => {
+const remove = (key, data, pk) => {
   state[key].map((item, index) => {
     if(data.hasOwnProperty(pk) && item[pk] == data[pk]) return state[key].splice(index, 1);
     else if(item[pk] == data) return state[key].splice(index, 1);
   });
 }
 
+const reset = (key) => {
+  state[key] = null;
+}
+
+
+
 const savePages = (key, pages) => {
   state[key+'Pages'] = pages;
 }
 
-export default{ create, update, remove, savePages };
+export default{ create, update, remove, reset, savePages };

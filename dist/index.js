@@ -130,6 +130,13 @@ export default class MPage {
     return this.get(key, this.page);
   }
 
+  resetStore(key){
+    if(!this.requiredKey(key)) return false;
+    if(!this.validateState(key)) return false;
+
+    return this.mutations.reset(key);
+  }
+
   // Other functions
     // My data
     myData(){
