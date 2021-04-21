@@ -23,6 +23,7 @@ export default class MPage {
     this.state = store.state;
     this.mutations = store.mutations;
     this.getters = store.getters;
+    this.timer = 0;
 
     return this;
   }
@@ -192,7 +193,27 @@ export default class MPage {
       }
       // Params for backend MPage refresh
       resetParams(key, page){
-        if(this.state[key] && this.state[key].length > 0) return '?position=0&perpage=' + this.state[key].length * 2 + '&truePerpage=' + this.perpage;
-        else return '?position=0&perpage=' + this.perpage + '&truePerpage=' + this.perpage;
+        // Reset and init timer
+        this.timer = 0;
+        setInterval(() => {this.timer++ }, 1000);
+
+        // Get number items
+        let items = this.perpage;
+        if(this.state[key] && this.state[key].length > 0)
+          items = this.state[key].length*this.getMultiple();
+
+        return '?position=0&perpage=' + items + '&truePerpage=' + this.perpage;
       }
+
+    // Get number items for timer
+    getMultiple(){
+      if(this.timer > 60*5) return 4;
+      else if(this.timer > 60*10) return 6;
+      else if(this.timer > 60*20) return 8;
+      else if(this.timer > 60*30) return 10;
+      else if(this.timer > 60*40) return 12;
+      else if(this.timer > 60*50) return 14;
+      else if(this.timer > 60*60) return 16;
+      else return 2;
+    }
 }
