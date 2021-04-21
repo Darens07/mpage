@@ -192,7 +192,7 @@ export default class MPage {
         return params;
       }
       // Params for backend MPage refresh
-      resetParams(key, page){
+      resetParams(key){
         // Reset and init timer
         this.timer = 0;
         setInterval(() => {this.timer++ }, 1000);
@@ -202,7 +202,8 @@ export default class MPage {
         if(this.state[key] && this.state[key].length > 0)
           items = this.state[key].length*this.getMultiple();
 
-        return '?position=0&perpage=' + items + '&truePerpage=' + this.perpage;
+        // return '?position=0&perpage=' + items + '&truePerpage=' + this.perpage;
+        return this.timer;
       }
 
     // Get number items for timer
