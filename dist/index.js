@@ -49,7 +49,7 @@ export default class MPage {
     this.items = [];
 
     // Save data
-    if(!this.validateState(key)) this.mutations.create(key, data);
+    if(!this.validateState(key) || this.state[key] == null) this.mutations.create(key, data);
     else this.mutations.update(key, data, pk);
 
     return this.get(key, this.page);
