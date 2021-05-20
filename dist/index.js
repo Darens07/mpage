@@ -134,6 +134,11 @@ export default class MPage {
     if(!this.requiredKey(key)) return false;
     if(!this.validateState(key)) return false;
 
+    // Reseteando paginacion
+    this.page = 1;
+    this.pages = 1;
+    
+    // Reseteando items
     return this.mutations.reset(key);
   }
 
